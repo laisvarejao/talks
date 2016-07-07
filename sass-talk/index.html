@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Sass: Vinta's Way</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Open Sans'; }
+
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+
+      .remark-code-line-highlighted {
+        background-color: rgba(90, 90, 90, 0.5);
+      }
+
+      .remark-slide-content blockquote {
+        font-size: 25px;
+      }
+
+      .cover h1 {
+        font-size: 65px;
+      }
+
+      h3 {
+        font-size: 40px;
+        color: #777;
+      }
+
+      strong {
+        color: #c1169c;
+      }
+
+      hr {
+        width: 50%;
+        border: 1px solid #c1169c;
+      }
+
+      ul {
+        list-style-type: square;
+      }
+
+      li {
+        margin-bottom: 1.5em;
+      }
+
+      .text-help {
+        font-size: 16px;
+      }
+
+      .left-content {
+        width: 60%;
+        float: left;
+      }
+
+      .right-content {
+        width: 40%;
+        float: right;
+      }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+class: center, middle, cover
+
+# Sass: Vinta's Way
+***
+### Lais Varejão
+
+---
+
+class: center, middle
+
+> **Sass is an extension of CSS** that adds power and elegance to the basic language. It allows you to use **variables**, **nested rules**, **mixins**, **inline imports**, and more, all with a fully CSS-compatible syntax.
+
+---
+
+class: center, middle
+
+# Getting Started
+
+---
+
+class: middle
+
+```bash
+gem install sass
+```
+
+```bash
+sass --watch assets/sass:assets --style [nested|expanded|compact|compressed]
+```
+
+---
+
+# How to structure a Sass project?
+
+```yaml
+sass/
+├── components/                  # Navigation, footer, forms, cards, etc.
+├── helpers/
+│   ├── _functions.scss
+│   ├── _helpers.scss            # Utility classes
+│   ├── _mixins.scss
+│   ├── _placeholders.scss
+│   └── _typography.scss         # Fonts variables and imports
+├── pages/                       # Templates' sass
+├── vendor/
+│   └── custom-bootstrap.scss    # Bootstrap's variables and classes
+│
+├── _global.scss                 # Base styles for all pages
+├── _variables.scss              # Custom variables
+└── style.scss                   # Main sass file
+```
+
+---
+
+class: center, middle
+
+# Learn the Basics
+
+---
+
+# Import
+
+```scss
+// Main Style
+
+// General
+@import "variables";
+@import "helpers/functions";
+@import "helpers/helpers";
+@import "helpers/mixins";
+@import "helpers/placeholders";
+@import "helpers/typography";
+@import "global";
+```
+.text-help.right[***** style.scss]
+
+--
+
+```scss
+// Typography
+
+// Google Fonts
+@import url(//fonts.googleapis.com/css?family=Averia+Serif+Libre);
+@import url(//fonts.googleapiscom/css?family=Open+Sans:400,700);
+```
+.text-help.right[***** _typography.scss]
+
+---
+
+# Variables
+
+```scss
+// Variables
+
+// Colors
+$color-white: #fff;
+$color-oil: #666;
+$color-forest-green: #0e9824;
+$color-iris-blue: #00b6ad;
+
+// Navbar
+$navbar-bg: $color-white;
+$navbar-logo-height: 42px;
+$navbar-link-color: $color-iris-blue;
+$navbar-link-hover-decoration: line-through;
+```
+.text-help.right[***** _variables.scss]
+
+---
+
+# Nesting
+
+```scss
+// Navigation
+
+.navbar {
+  background-color: $navbar-bg;
+  font-size: $font-size-sm;
+
+  a {
+    color: $navbar-link-color;
+
+    &:hover {
+      text-decoration: $navbar-link-hover-decoration;
+    }
+  }
+}
+```
+.text-help.right[***** _navigation.scss]
+
+--
+
+The Inception Rule: **don’t go more than four levels deep.**
+
+---
+
+# Extend
+
+```scss
+// Navigation
+
+.navbar-toggler {
+  @extend .p-y-1, .pull-xs-right;
+}
+```
+.text-help.right[***** _navigation.scss]
+
+--
+
+**Beware.** This compiles to:
+
+```css
+  .p-y-1, .navbar-toggler {
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+  }
+
+  .pull-xs-right, .navbar-toggler {
+    float: right !important;
+  }
+}
+```
+.text-help.right[***** style.css]
+
+---
+
+# Placeholders
+
+```scss
+%truncate {
+  width: 300px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+%highlight {
+  transform: scale(1.1);
+}
+```
+.text-help.right[***** _placeholders.scss]
+
+--
+
+*Usage:*
+
+```scss
+.blog-article-title {
+  @extend %truncate;
+}
+
+.blog-article {
+  a:hover {
+    @extend %highlight;
+  }
+}
+```
+
+---
+
+# Mixins
+
+```scss
+@mixin position($position, $top: null, $right: null, $bottom: null,
+                $left: null) {
+  position: $position;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}
+
+@mixin background($img, $position: 0 0, $size: auto, $repeat: no-repeat) {
+  background: {
+    image: url($img);
+    position: $position;
+    size: $size;
+    repeat: $repeat;
+  }
+}
+```
+.text-help.right[***** _mixins.scss]
+
+--
+
+*Usage:*
+
+```scss
+.badge {
+  @include position(absolute, $top: 0, $left: 0);
+}
+```
+---
+
+# Functions
+
+```scss
+@function lineClampHeight($lines-to-show, $font-size,
+    $line-height: $line-height) {
+  @return $lines-to-show * $font-size * $line-height;
+}
+```
+.text-help.right[***** _functions.scss]
+
+--
+
+*Usage:*
+
+```scss
+@mixin lineClamp($lines-to-show, $font-size) {
+  display: block; /* Fallback for non-webkit */
+  display: -webkit-box;
+* max-height: lineClampHeight($lines-to-show, $font-size);
+  -webkit-line-clamp: $lines-to-show;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+```
+.text-help.right[***** _mixins.scss]
+
+---
+
+# Control Directives
+
+```scss
+@mixin border($color, $style: 1px solid, $sides: null) {
+  @if ($sides == null) {
+      border: $style $color;
+  } @else {
+    @each $side in $sides {
+      @if ($side == 'top' or
+          $side == 'right' or
+          $side == 'bottom' or
+          $side == 'left') {
+        border-#{$side}: $style $color;
+      }
+    }
+  }
+}
+```
+.text-help.right[***** _mixins.scss]
+
+---
+
+# Responsive Utilities
+
+**Beware.** At Vinta, only when using Bootstrap 3
+
+```scss
+// Media Queries
+$extra-small-devices-min: "(min-width: 440px)";
+$small-devices-min: "(min-width: 768px)";
+$medium-devices-min: "(min-width: 992px)";
+$large-devices-min: "(min-width: 1200px)";
+$extra-large-devices: "(min-width: 1440px)";
+...
+```
+.text-help.right[***** _variables.scss]
+
+```scss
+.intro {
+  background-image: url('#{$siteurl}/theme/images/bg-workstation-1440.jpg');
+
+* @media #{$extra-large-devices} {
+    background-image: url('#{$siteurl}/theme/images/bg-workstation-1980.jpg');
+  }
+}
+```
+.text-help.right[***** _intro.scss]
+
+---
+
+class: center, middle
+
+# Follow Vinta's Guidelines
+
+---
+
+# Tips & Tricks
+
+- **D**on't **R**epeat **Y**ourself
+--
+
+- **K**eep **I**t **S**emantic **S**assy
+--
+
+- Componentize to decouple
+--
+
+- Don't try to mock the HTML
+--
+
+- Use a color highlighter plugin in your editor
+--
+
+- Set editor snippets for common **@includes**, **@extends**
+--
+
+- Check our [**Frontend Boilerplate**](https://github.com/vintasoftware/frontend-boilerplate/blob/master/assets/sass/style.scss) when in doubt
+
+---
+
+class: center, middle
+
+# Take advantage of Bootstrap Sass
+
+---
+
+# Customize Variables
+
+```scss
+// Custom Bootstrap
+
+// General
+$enable-transitions: true;
+
+// Typography
+$font-size-h1: 2rem;
+$font-size-h2: 1.75rem;
+
+// Button
+$btn-font-weight: bold;
+
+// Link
+$link-hover-decoration: none;
+
+// Navbar
+$navbar-border-radius: 0;
+```
+.text-help.right[***** custom_bootstrap.scss]
+
+---
+
+# Include Grid Mixins & Media Queries Mixins
+
+```scss
+.blog-article-wrapper {
+  @include make-row($gutter: 2rem);
+
+  .blog-articles-list, .blog-categories {
+    @include make-col($gutter: 2rem);
+    @include make-col-span(12);
+  }
+
+  @include media-breakpoint-up(sm) {
+    .blog-articles-list {
+      @include make-col-span(8);
+    }
+
+    .blog-categories {
+      @include make-col-span(4);
+    }
+  }
+}
+```
+.text-help.right[***** _blog-article.scss]
+
+---
+
+# Extend Classes
+
+http://hackerthemes.com/bootstrap-cheatsheet/
+
+```scss
+// Headings
+h1 {
+  @extend .m-y-1, .text-xs-left, .text-sm-center;
+  color: $color-oil;
+}
+
+// Buttons
+.default-btn {
+  @extend .btn, .btn-primary, .btn-primary-outline;
+}
+```
+.text-help.right[***** _global.scss]
+
+---
+
+class: center, middle
+
+# Bootstrap 3 vs. Bootstrap 4
+
+---
+
+class: middle
+
+```html
+<div class="container">
+  <div class="blog">
+    <div class="row">
+      {% for article in articles %}
+        <article class="col-xs-6">
+          <h4>
+            <a href="{{ article.url }}">
+              {{ article.title }}
+            </a>
+          </h4>
+          <p>
+            {{ article.abstract }}
+          </p>
+          <h5 class="pull-right">
+            <a href="{{ article.url }}">
+              <b>read more</b>
+            </a>
+          </h5>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+```
+.text-help.right[***** _blog.html]
+
+---
+
+class: middle
+
+```html
+<div class="container">
+  <div class="blog">
+*   <div class="row">
+      {% for article in articles %}
+        <article class="col-xs-6">
+          <h4>
+            <a href="{{ article.url }}">
+              {{ article.title }}
+            </a>
+          </h4>
+          <p>
+            {{ article.abstract }}
+          </p>
+          <h5 class="pull-right">
+            <a href="{{ article.url }}">
+              <b>read more</b>
+            </a>
+          </h5>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+```
+.text-help.right[***** _blog.html]
+
+---
+
+class: middle
+
+.left-content[
+```html
+<div class="container">
+  <div class="blog">
+    {% for article in articles %}
+*     <article class="col-xs-6">
+        <h4>
+          <a href="{{ article.url }}">
+            {{ article.title }}
+          </a>
+        </h4>
+        <p>
+          {{ article.abstract }}
+        </p>
+        <h5 class="pull-right">
+          <a href="{{ article.url }}">
+            <b>read more</b>
+          </a>
+        </h5>
+      </article>
+    {% endfor %}
+  </div>
+</div>
+```
+.text-help.right[***** _blog.html]
+]
+
+.right-content[
+```scss
+.blog {
+  @include make-row();
+}
+```
+.text-help.right[*****_blog.scss]
+]
+
+---
+
+class: middle
+
+.left-content[
+```html
+<div class="container">
+  <div class="blog">
+    {% for article in articles %}
+      <article>
+        <h4>
+          <a href="{{ article.url }}">
+            {{ article.title }}
+          </a>
+        </h4>
+        <p>
+          {{ article.abstract }}
+        </p>
+*       <h5 class="pull-right">
+          <a href="{{ article.url }}">
+            <b>read more</b>
+          </a>
+        </h5>
+      </article>
+    {% endfor %}
+  </div>
+</div>
+```
+.text-help.right[***** _blog.html]
+]
+
+.right-content[
+```scss
+.blog {
+  @include make-row();
+
+  article {
+    @include make-col();
+    @include make-col-span(6);
+  }
+}
+```
+.text-help.right[*****_blog.scss]
+]
+
+---
+
+class: middle
+
+.left-content[
+```html
+<div class="container">
+  <div class="blog">
+    {% for article in articles %}
+      <article>
+        <h4>
+          <a href="{{ article.url }}">
+            {{ article.title }}
+          </a>
+        </h4>
+        <p>
+          {{ article.abstract }}
+        </p>
+        <h5>
+          <a href="{{ article.url }}">
+            <b>read more</b>
+          </a>
+        </h5>
+      </article>
+    {% endfor %}
+  </div>
+</div>
+```
+.text-help.right[***** _blog.html]
+]
+
+.right-content[
+```scss
+.blog {
+  @include make-row();
+
+  article {
+    @include make-col();
+    @include make-col-span(6);
+  }
+
+  h5 {
+    @extend .pull-xs-right;
+  }
+}
+```
+.text-help.right[*****_blog.scss]
+]
+
+---
+
+class: center, middle
+
+# Thanks!
+
+    </textarea>
+    <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create({
+        slideNumberFormat: '',
+        highlightStyle: 'tomorrow-night',
+        highlightSpans: true,
+        highlightLines: true,
+      });
+    </script>
+  </body>
+</html>
