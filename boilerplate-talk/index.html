@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Definindo um Boilerplate</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body {
+        font-family: 'Open Sans';
+      }
+
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+
+      h3 {
+        font-size: 40px;
+        color: #777;
+      }
+
+      strong, a, a:visited {
+        color: #49aa8d;
+      }
+
+      hr {
+        width: 50%;
+        border: 1px solid #49aa8d;
+      }
+
+      ul {
+        list-style-type: square;
+      }
+
+      li {
+        margin-bottom: 1.5em;
+        font-size: 23px;
+      }
+
+      .django pre {
+        padding-top: 140px;
+      }
+
+      .react img {
+        max-width: 500px;
+      }
+
+      .bio li {
+        font-size: 20px;
+      }
+
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+
+      .remark-code-line-highlighted {
+        background-color: rgba(90, 90, 90, 0.5);
+      }
+
+      .remark-code-line {
+        min-height: 1.5em;
+      }
+
+      .remark-slide-content blockquote {
+        font-size: 32px;
+      }
+
+      .cover h1 {
+        font-size: 65px;
+        color: #fff;
+      }
+
+      .cover h2 {
+        color: #fff;
+      }
+
+      .left-column, .right-column, .half-column {
+        position: relative;
+        float: left;
+      }
+
+		  .left-column {
+        width: 40%;
+      }
+
+      .left-column h2 {
+        margin-top: 10px;
+      }
+
+      .right-column {
+        width: 60%;
+      }
+
+      .half-column {
+        width: 50%;
+      }
+
+      .text-help {
+        font-size: 16px;
+      }
+
+      .left-content {
+        width: 40%;
+        float: left;
+      }
+
+      .right-content {
+        width: 60%;
+        float: right;
+      }
+
+      .middle-content {
+        width: 80%;
+        margin: auto;
+      }
+
+      .img-fluid img {
+        width: 100%;
+        height: auto;
+        margin: auto;
+        display: block;
+      }
+
+      .img-border img {
+        padding: 10px;
+        border: 1px solid #eee;
+      }
+
+      .img-padding img {
+        margin-top: 55px;
+      }
+
+      .fade {
+        opacity: .4;
+        font-size: .8rem;
+      }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+
+layout: false
+
+background-image: url(img/template-cover.jpg)
+
+class: center, middle, cover
+
+# Definindo um Boilerplate Customizável Usando Django, React e Bootstrap
+
+## por Lais Varejão
+
+---
+
+layout: true
+
+background-image: url(img/template.jpg)
+
+---
+
+class: middle, bio
+
+.left-column[
+  ##Lais Varejão
+]
+
+.right-column[
+- Desenvolvedora na Vinta Software
+- Recurse Center, NY: [https://www.recurse.com/](https://www.recurse.com/)
+- UX, Sass, JavaScript, Django, etc
+- Django Boilerplate: [https://github.com/vintasoftware/boilerplate](https://github.com/vintasoftware/boilerplate)
+]
+
+---
+
+class: center, middle
+
+# O que é um boilerplate?
+***
+
+---
+
+class: center, middle
+
+> **Boilerplate é qualquer trecho de código reusável** em novos contextos com alterações mínimas
+
+---
+
+class: middle
+
+.center[
+  ## Isso é um boilerplate
+]
+
+.middle-content[
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+  </head>
+  <body>
+
+  </body>
+</html
+```
+]
+
+---
+
+class: center, middle
+
+## **Project templates** também são boilerplates
+
+.img-fluid[![Django Start Command](img/djangostart.png)]
+.img-fluid[![Django Start Project](img/djangostart-project.png)]
+
+---
+
+class: center, middle
+
+# Boilerplates Populares
+***
+
+---
+
+## HTML5 Boilerplate
+#### https://html5boilerplate.com/
+
+.img-fluid.img-border[![HTML5 Boilerplate](img/html5-boilerplate.png)]
+
+---
+
+##Initializr
+#### http://www.initializr.com/
+
+.img-fluid.img-border[![Initializr](img/initializr.png)]
+
+???
+Initializr is an HTML5 templates generator to help you getting started with a new project based on HTML5 Boilerplate
+
+---
+
+## Cookiecutter Django
+#### https://github.com/pydanny/cookiecutter-django
+
+.img-fluid.img-border[![Cookiecutter Django](img/cookiecutter-django.png)]
+
+???
+Optional Integrations
+
+These features can be enabled during initial project setup.
+
+- Serve static files from Amazon S3 or Whitenoise
+- Configuration for Celery
+- Integration with MailHog for local email testing
+- Integration with Sentry for error logging
+- Integration with Opbeat for performance monitoring
+
+---
+
+## Django Hackathon Starter
+#### https://github.com/DrkSephy/django-hackathon-starter
+
+.img-fluid.img-border[![Django Hackathon Starter](img/django-hackathon-starter.png)]
+
+???
+- A boilerplate for Django web applications
+- User Registration
+- Integration with Django Rest Framework
+- Basic Authentication with username and password
+- OAuth 2.0 Authentication
+- OAuth 1.0a Authentication
+
+---
+
+## Edge
+#### https://github.com/arocks/edge
+
+.img-fluid.img-border[![Edge](img/edge.png)]
+
+???
+- Python 2.7 and 3.4 + Django 1.8 support
+- Sign-ups and Log-ins - Basic user registration, log-ins, forgot password etc. styled with crispy forms
+- User Profiles - extendible user profile with great defaults like profile picture
+- Bootstrap bundled - Themed Bootstrap 3 based home page and admin out of the box
+
+---
+
+class: center, middle
+
+# Por que usar um boilerplate?
+***
+
+---
+
+class: center, middle
+
+> Configurar o ambiente inicial de um projeto novo pode ser uma tarefa **repetitiva** que **consume tempo** de desenvolvimento...
+
+???
+UM PROJETO WEB GERALMENTE REQUER FRONT/BACKEND ENTRE OUTROS REQUISITOS
+
+Se você for configurar tudo, vai ter que setar a base, depois setar envio de emails,
+criar o diretório dos assets, etc...
+
+---
+
+class: center, middle
+
+## Tudo isso é massa, mas...
+> A soluções disponíveis podem não se adequar ao seu **contexto**
+
+---
+
+class: center, middle
+
+# Por que não construir seu próprio boilerplate?
+***
+
+---
+
+## Só vejo vantagens
+
+- **Solução full-stack** adequada para seu contexto
+--
+
+- **Agilidade** no setup inicial
+--
+
+- **Padronização** dos projetos
+--
+
+- Guidelines bem definidas
+--
+
+- Project template **atualizado**
+--
+
+- Menor propensão a erros
+
+???
+- Não é pra você ficar preso em algo rígido, é para acelerar tarefas corriqueiras
+
+---
+
+class: center, middle
+
+# Vinta Boilerplate
+***
+
+---
+
+## Vinta Boilerplate
+####  https://github.com/vintasoftware/boilerplate
+
+Django, React, Bootstrap 4 with Python 3 and webpack project boilerplate
+
+.img-fluid.img-border.img-padding[![It Works](img/itworks.png)]
+
+???
+- COMPILAÇÃO DE ANOS DE EXPERIÊNCIA/BOAS PRÁTICAS
+- ALÉM DE AGILIDADE, VOCÊ COMO INICIANTE PODE ABSORVER AS BOAS PRÁTICAS EMPREGADAS
+- O QUE APRENDEMOS/ COMO FOI NOSSA EXPERIÊNCIA
+- OPEN SOURCE (PODEM FORKEAR) + PEDIR STAR
+
+---
+
+## Quais eram os nossos **requisitos**?
+
+.half-column[
+- Backend Framework
+- Responsive Styling
+- Interactive UI
+- Handling Static Assets
+- Database
+- Logging
+]
+
+.half-column[
+- E-mail Sending
+- Periodic Jobs
+- Continuous Integration
+- Static Files Serving
+- Easy Deployments
+- Performance Monitoring
+]
+
+???
+- Inclua tudo de forma generalista, quando não for precisar de alguma feature,
+você a remove no seu project setup
+
+---
+
+## Vinta's **tech stack**
+
+.half-column[
+- Django 1.10 .fade[Backend Framework]
+- django.js .fade[for generating URLs on JS]
+- Bootstrap alpha 4.2 .fade[Responsive Styling]
+- React .fade[Interactive UI?]
+- Webpack .fade[Bundling static assets]
+- PostgreSQL .fade[Database]
+- Papertrail .fade[Logging]
+]
+
+.half-column[
+- Sendgrid .fade[E-mail sending]
+- Redis & Celery .fade[Periodic jobs]
+- CircleCI .fade[Continuous Integration]
+- WhiteNoise .fade[Static files serving]
+- Heroku Button .fade[Easy deployments]
+- Opbeat .fade[Performance Monitoring]
+]
+
+???
+- VOCÊ PODE RETIRAR FEATURES QUE NÃO IRÁ USAR, COMO REACT
+
+---
+
+## **Estrutura**
+
+```yaml
+assets/
+bin/
+exampleapp/
+project_name/
+    settings/
+        __init__.py
+        base.py
+        local.py.example
+        production.py
+        test.py
+    __init__.py
+    celery.py
+    urls.py
+    wsgi.py
+templates/
+    exampleapp/
+      base.html
+```
+
+???
+- APPLICAÇÃO DAS NOSSAS GUIDELINES
+- ESTRUTURAÇÃO DO BACKEND E DO FRONTEND COM CONFIGURAÇÕES BÁSICAS
+- SEPARAÇÃO DO SETTINGS LOCAL E DE PRODUÇÃO
+- MODULARIZADA & DESACOPLÁVEL O QUE FACILIDADE O DESENVOLVIMENTO EM EQUIPE
+- MEU RELATO!!
+
+---
+
+## **Estrutura**
+
+```yaml
+assets/
+    js/
+        components/
+            HomePageReactTitle.js
+        constants/
+            index.js
+        containers/
+            HomePageContainer.js
+        pages/
+            homePage.js
+        routes/
+            index.js
+        utils/
+            index.js
+        index.js
+```
+
+???
+- CÓDIGOS EXEMPLO DE REACT COM A ESTRUTURA QUE DEVE SER ADOTADA
+
+---
+
+## **Estrutura**
+
+```yaml
+assets/
+    sass/
+        components/
+        helpers/
+            _all.scss
+            _functions.scss
+            _helpers.scss
+            _mixins.scss
+            _placeholders.scss
+            _typography.scss
+        pages/
+        vendor/
+            custom-bootstrap.scss
+        _global.scss
+        _variables.scss
+        _shame.scss
+        style.scss
+```
+
+???
+- APLICAÇÃO DAS GUIDELINES DE FRONTEND, SEGUINDO BOAS PRÁTICAS DE ARQUITETURA SASS
+
+---
+
+## Django
+
+`{{project_name}}`
+
+```python
+ROOT_URLCONF = '{{project_name}}.urls'
+               'django.contrib.messages.context_processors.messages',
+           ],
+       },
+   },
+]
+
+WSGI_APPLICATION = '{{project_name}}.wsgi.application'
+
+```
+.right[*****project_name/settings/base.py]
+
+---
+
+## Django
+
+`users` app
+
+```python
+class User(AbstractBaseUser, PermissionsMixin, IndexedTimeStampedModel):
+    email = models.EmailField(max_length=255, unique=True)
+    is_staff = models.BooleanField(
+        default=False,
+        help_text=_('Designates whether the user can log into this admin '
+                    'site.'))
+    is_active = models.BooleanField(
+        default=True,
+        help_text=_('Designates whether this user should be treated as '
+                    'active. Unselect this instead of deleting accounts.'))
+
+    objects = UserManager()
+
+    USERNAME_FIELD = 'email'
+    ...
+```
+.right[*****users/model.py]
+
+---
+
+class: django
+
+## Django
+
+```yaml
+  django-admin startproject theprojectname
+    --extension py,yml,json
+    --name Procfile
+    --template=https://github.com/vintasoftware/boilerplate/archive/master.zip
+```
+
+???
+- O NOSSO BOILERPLATE É DJANGO PROJECT TEMPLATE
+
+---
+
+## Webpack
+
+- Module bundler
+
+```js
+baseConfig.entry = [
+  'bootstrap-loader/extractStyles',
+  './assets/js/index.js',
+]
+
+baseConfig.output = {
+  path: path.resolve('./assets/bundles/'),
+  publicPath: '',
+  filename: '[name]-[hash].js',
+}
+
+baseConfig.module.loaders.push({
+  test: /\.jsx?$/,
+  exclude: [node_modules_dir],
+  loaders: ['babel?presets[]=react,presets[]=es2015']
+});
+```
+
+???
+- HOT RELOAD
+- LOADING DE DEPENDÊNCIAS DE FRONTEND
+- DESACOPLAMENTO FRONT & BACK
+- COMPILAÇÃO DE UM ÚNICO BUNDLE JS & OUTRO CSS
+- MENOS REQUESTS NO BROWSER
+
+---
+
+class: react
+
+## React
+- A JavaScript library for building user interfaces
+- ECMAScript 6 + Babel
+
+.img-fluid[![React](img/react.png)]
+.center[http://todomvc.com/examples/react/#/]
+
+
+???
+- SINGLE PAGE APPS (USADO PELO FACEBOOK)
+- COMPONENTIZADO
+- MINIMIZA O NÚMERO DE ESCRITAS NO DOM, POR ISSO É MAIS RÁPIDO
+- ECMA6: EVOLUÇÃO DO JS
+- BABEL PARA CONVERSÃO
+- JSX (COMPONENTES COMO HTML)
+---
+
+## Bootstrap 4
+
+- Sass: Syntactically Awesome Style Sheets
+
+.img-fluid.img-border[![Bootstrap Variables](img/bootstrap-variables.png)]
+
+---
+
+## Como começar um novo projeto?
+
+### Project bootstrap
+
+[ ] `pip install -r requirements-to-freeze.txt`
+
+[ ] `pip freeze > requirements.txt`
+
+[ ] `npm update --save`
+
+[ ] Check for outdated npm dependencies with `npm outdated` and update them
+
+[ ] Change the first line of README to the name of the project
+
+???
+Apesar de ter vários passos, isso é bem mais simples do que configurar
+todo projeto novo a cada vez
+
+---
+
+## E para iniciar o desenvolvimento?
+
+### Quickstart
+
+- Create a copy of ``{{project_name}}/settings/local.py.example`` in ``{{project_name}}/settings/local.py``
+- Create a ``.env`` file in the root of the project and add ``DJANGO_SETTINGS_MODULE="{{project_name}}.settings.local"`` to it
+- Create the migrations for `users` app: `python manage.py makemigrations`
+- Run the migrations: `python manage.py migrate`
+
+---
+
+class: middle, center
+
+##  E o deploy?
+***
+
+---
+
+## CircleCI
+
+- Continuous Integration
+
+.img-fluid.img-border[![CircleCi](img/circleci.png)]
+
+???
+- DEFINIÇÃO DE UM BRANCH
+
+- DEPLOY LINDAMENTE
+
+- CAMADA DE SEGURANÇA
+
+---
+
+class: center, middle
+
+# Como tem sido usar o **Vinta Boilerplate**...
+
+---
+
+class: center, middle
+
+# **Perguntas?**
+
+???
+
+---
+
+class: center, middle
+
+# **Obrigada!**
+Slides: [http://bit.ly/pybr12-vinta](http://bit.ly/pybr12-vinta)
+
+Github: @laisvarejao
+
+???
+TEMOS ADESIVOS
+
+---
+
+    </textarea>
+    <script src="js/remark-latest.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create({
+        slideNumberFormat: '',
+        highlightStyle: 'tomorrow-night',
+        highlightSpans: true,
+        highlightLines: true,
+      });
+    </script>
+  </body>
+</html>
